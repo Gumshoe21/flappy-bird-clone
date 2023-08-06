@@ -35,6 +35,16 @@ class MenuScene extends BaseScene {
 		textGO.on('pointerout', () => {
 			textGO.setStyle({ fill: '#fff' });
 		});
+
+		textGO.on('pointerup', () => {
+			// check if menu item has such a scene, and if it does, call the scene's start function with the menu item's scene passed in as an arg
+			menuItem.scene && this.scene.start(menuItem.scene);
+
+			// destroy the canvas on 'Exit'
+			if (menuItem.text === 'Exit') {
+				this.game.destroy(true);
+			}
+		});
 	}
 }
 
