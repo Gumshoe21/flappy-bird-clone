@@ -77,6 +77,8 @@ class PlayScene extends BaseScene {
 		pauseButton.on('pointerdown', () => {
 			this.physics.pause();
 			this.scene.pause();
+			// whereas scene.start shuts down the current scene and starts the provided one, scene.launch will launch the given Scene and run it in parallel with this one. it won't shut down the current scene.
+			this.scene.launch('PauseScene');
 		});
 	}
 
