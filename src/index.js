@@ -14,7 +14,7 @@ const SHARED_CONFIG = {
 	startPosition: BIRD_POSITION,
 };
 
-const Scenes = [PreloadScene, MenuScene, ScoreScene, PlayScene, PauseScene];
+const Scenes = [PreloadScene, MenuScene, ScoreScene, PlayScene, PauseScene]; // order matters - we need pause after play 
 const createScene = Scene => new Scene(SHARED_CONFIG); // helper function to instantiate scene
 const initScenes = () => Scenes.map(createScene);
 

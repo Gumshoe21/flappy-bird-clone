@@ -28,7 +28,18 @@ class PauseScene extends BaseScene {
 		});
 
 		textGO.on('pointerup', () => {
-			console.log('Clicking on some option!');
+			// if there's a scene, and menu text is 'Continue' and we click on it
+			if (menuItem.scene && menuItem.text === 'Continue') {
+				// Shutting down the Pause Scene and resuming the Play Scene
+				this.scene.stop(); //shutdown current scene
+				// resume scene running in parallel -PlayScene
+				this.scene.resume(menuItem.scene);
+			} else {
+				// Shutting PlayScene, PauseScene and running Menu
+				this.scene.stop('PlayScene');
+				// if the menuItem scene is not 'PlayScene', then it must be 'PauseScene', so start it. we know it is 'PauseScene' if we got to this point in the code because we already verified that menuItem.text is NOT 'Continue', and if that's the case, then the text is 'Exit' and the scene is therefore 'MenuScene'
+				this.scene.start(menuItem.scene);
+			}
 		});
 	}
 }
