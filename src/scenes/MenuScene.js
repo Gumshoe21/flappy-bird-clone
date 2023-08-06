@@ -49,3 +49,4 @@ class MenuScene extends BaseScene {
 }
 
 export default MenuScene;
+
