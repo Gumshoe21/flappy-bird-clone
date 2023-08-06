@@ -26,6 +26,7 @@ class PlayScene extends BaseScene {
 		this.createScore();
 		this.createPause();
 		this.handleInputs();
+		this.listenToEvents();
 	}
 
 	update() {
@@ -33,6 +34,22 @@ class PlayScene extends BaseScene {
 		this.recyclePipes();
 	}
 
+	listenToEvents() {
+		// executed whenever a scene is resumed
+		this.events.on('resume', () => {
+			this.initialTime = 3;
+			this.countDownText = this.add
+				.text(...this.screenCenter, 'Fly in: ' + this.initialTime, this.fontOptions)
+
+				.setOrigin(0.5, 0.5);
+			this.timedEvent = this.time.addEvent({
+				delay: 1000,
+				callback: () => console.log(this.initialTime--),
+				callbackScope: this,
+				loop: true,
+			});
+		});
+	}
 	createBG() {
 		this.add.image(0, 0, 'sky').setOrigin(0);
 	}
