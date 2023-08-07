@@ -16,6 +16,7 @@ class MenuScene extends BaseScene {
 
 		// The bind() method creates a new function that, when called, has its this keyword set to the provided value, with a given sequence of arguments preceding any provided when the new function is called.
 		// this binds the context to be MenuScene
+		// createMenu from 'BaseScene'
 		this.createMenu(this.menu, this.setupMenuEvents.bind(this));
 		// this.createMenu(this.menu, (menuItem) => this.setupMenuEvents(menuItem));
 	}

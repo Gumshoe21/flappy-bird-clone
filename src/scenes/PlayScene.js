@@ -44,12 +44,24 @@ class PlayScene extends BaseScene {
 				.setOrigin(0.5, 0.5);
 			this.timedEvent = this.time.addEvent({
 				delay: 1000,
-				callback: () => console.log(this.initialTime--),
+				callback: this.countDown,
 				callbackScope: this,
 				loop: true,
 			});
 		});
 	}
+
+	countDown() {
+		this.initialTime--;
+		this.countDownText.setText('Fly in: ' + this.initialTime);
+		if (this.initialTime <= 0) {
+			this.isPaused = false;
+			this.countDownText.setText('');
+			this.physics.resume();
+			this.timedEvent.remove();
+		}
+	}
+
 	createBG() {
 		this.add.image(0, 0, 'sky').setOrigin(0);
 	}
