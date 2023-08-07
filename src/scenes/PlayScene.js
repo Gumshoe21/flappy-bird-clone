@@ -86,7 +86,7 @@ class PlayScene extends BaseScene {
 	}
 
 	createBird() {
-		this.bird = this.physics.add.sprite(this.config.startPosition.x, this.config.startPosition.y, 'bird').setOrigin(0);
+		this.bird = this.physics.add.sprite(this.config.startPosition.x, this.config.startPosition.y, 'bird').setFlipX(true).setScale(3).setOrigin(0);
 		this.bird.body.gravity.y = 600;
 		this.bird.setCollideWorldBounds(true);
 	}
@@ -171,6 +171,7 @@ class PlayScene extends BaseScene {
 			}
 		});
 	}
+
 	increaseDifficulty() {
 		if (this.score === 1) {
 			this.currentDifficulty = 'normal';
@@ -180,6 +181,7 @@ class PlayScene extends BaseScene {
 			this.currentDifficulty = 'hard';
 		}
 	}
+
 	getRightMostPipe() {
 		let rightMostX = 0;
 
