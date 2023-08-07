@@ -8,6 +8,7 @@ class PlayScene extends BaseScene {
 
 		this.bird = null;
 		this.pipes = null;
+		this.isPaused = false;
 
 		this.pipeHorizontalDistance = 0;
 		this.pipeVerticalDistanceRange = [150, 250];
@@ -36,7 +37,10 @@ class PlayScene extends BaseScene {
 
 	listenToEvents() {
 		// executed whenever a scene is resumed
-		this.events.on('resume', () => {
+		if (this.pauseEvent) {
+			return;
+		}
+		this.pauseEvent = this.events.on('resume', () => {
 			this.initialTime = 3;
 			this.countDownText = this.add
 				.text(...this.screenCenter, 'Fly in: ' + this.initialTime, this.fontOptions)
@@ -97,6 +101,7 @@ class PlayScene extends BaseScene {
 	}
 
 	createPause() {
+		this.isPaused = false;
 		const pauseButton = this.add
 			.image(this.config.width - 10, this.config.height - 10, 'pause')
 			.setInteractive()
@@ -104,6 +109,7 @@ class PlayScene extends BaseScene {
 			.setOrigin(1);
 
 		pauseButton.on('pointerdown', () => {
+			this.isPaused = true;
 			this.physics.pause();
 			this.scene.pause();
 			// whereas scene.start shuts down the current scene and starts the provided one, scene.launch will launch the given Scene and run it in parallel with this one. it won't shut down the current scene.
@@ -184,6 +190,7 @@ class PlayScene extends BaseScene {
 	}
 
 	flap() {
+		if (this.isPaused) return;
 		this.bird.body.velocity.y = -this.flapVelocity;
 	}
 
