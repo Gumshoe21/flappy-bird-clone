@@ -28,7 +28,7 @@ class PlayScene extends BaseScene {
 			},
 			hard: {
 				pipeHorizontalDistanceRange: [250, 310],
-				pipeVerticalDistanceRange: [120, 170],
+				pipeVerticalDistanceRange: [50, 100],
 			},
 		};
 	}
@@ -166,11 +166,20 @@ class PlayScene extends BaseScene {
 					this.placePipe(...tempPipes);
 					this.increaseScore();
 					this.saveBestScore();
+					this.increaseDifficulty();
 				}
 			}
 		});
 	}
+	increaseDifficulty() {
+		if (this.score === 1) {
+			this.currentDifficulty = 'normal';
+		}
 
+		if (this.score === 3) {
+			this.currentDifficulty = 'hard';
+		}
+	}
 	getRightMostPipe() {
 		let rightMostX = 0;
 
